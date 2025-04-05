@@ -7,7 +7,7 @@ public:
 	Level() = default;
 	~Level() = default;
 	void load();
-	void update();
+	void update(sf::RenderWindow&);
 	void drawTo(sf::RenderWindow&);
 private:
 	Catcher catcher;

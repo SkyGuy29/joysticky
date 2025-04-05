@@ -27,6 +27,7 @@ void Game::run()
 		}
 
 		//Update the game state
+		level.update(window);
 
 		//Render the game
 		window.clear();

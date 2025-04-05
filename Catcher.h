@@ -7,7 +7,7 @@ class Catcher
 public:
 	Catcher();
 	~Catcher() = default;
-	void update();
+	void update(const sf::RenderWindow&);
 	void drawTo(sf::RenderWindow&);
 private:
 	sf::CircleShape middle, outline;
