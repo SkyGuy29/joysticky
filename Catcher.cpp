@@ -34,7 +34,7 @@ Catcher::Catcher()
 	for (int i = 0; i <= res; i++)
 	{
 		const float angle = static_cast<float>(i) / (catcher.getPointCount() - 2) * PI * catchWidth //ok so hopefully all of this makes sense
-		- (PI / 4 * catchWidth - PI ); //i have no idea why i needed to do this but it works so whatever
+		- (PI / 4 * catchWidth - PI ); //doing this so that it faces up, the 0 value for the rotation setup I made
 
 		//inside points, first half of points
 		catcher.setPoint(i, sf::Vector2f(insRadius * cos(angle),	insRadius	* sin(angle)));
@@ -52,6 +52,13 @@ Catcher::Catcher()
 
 void Catcher::update(const sf::RenderWindow& window)
 {
+	/*
+	if (prevMousePos != mousePos(window))
+		catcher.setRotation(180 / PI * angleOf(prevMousePos, mousePos(window)));
+	else
+		catcher.setRotation(180 / PI * angleOf(catcher.getPosition(), mousePos(window)));
+	prevMousePos = mousePos(window);
+	 */
 	catcher.setRotation(180 / PI * angleOf(catcher.getPosition(), mousePos(window)));
 }
 

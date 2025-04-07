@@ -12,4 +12,5 @@ public:
 private:
 	sf::CircleShape middle, outline;
 	sf::ConvexShape catcher;
+	sf::Vector2f prevMousePos;
 };
