@@ -8,20 +8,22 @@ Catcher::Catcher()
 	constexpr int res = 15; //value to adjust how many points to use to draw the catcher, number is not exactly the number of points but scales directly with it, lowest is 1
 	outline.setRadius(250 * WINDOW_SCALE);
 	outline.setOrigin(outline.getRadius(), outline.getRadius()); //center of circle
-	outline.setPosition(sf::Vector2f(WINDOW_SIZE.x * WINDOW_SCALE / 2, WINDOW_SIZE.y * WINDOW_SCALE / 2)); //center of the window
+	outline.setPosition(sf::Vector2f(WINDOW_CENTER.x, WINDOW_CENTER.y)); //center of the window
 	outline.setFillColor(sf::Color::Transparent);
 	outline.setOutlineColor(sf::Color::White);
 	outline.setOutlineThickness(5);
+	outline.setPointCount(40);
 
 	middle.setRadius(170 * WINDOW_SCALE);
 	middle.setOrigin(middle.getRadius(), middle.getRadius());
-	middle.setPosition(sf::Vector2f(WINDOW_SIZE.x * WINDOW_SCALE / 2, WINDOW_SIZE.y * WINDOW_SCALE / 2));
+	middle.setPosition(sf::Vector2f(WINDOW_CENTER.x, WINDOW_CENTER.y));
 	middle.setFillColor(sf::Color::Transparent);
 	middle.setOutlineColor(sf::Color::White);
 	middle.setOutlineThickness(5);
+	middle.setPointCount(40);
 
 	catcher.setOrigin(0, 0);
-	catcher.setPosition(sf::Vector2f(WINDOW_SIZE.x * WINDOW_SCALE / 2, WINDOW_SIZE.y * WINDOW_SCALE / 2));
+	catcher.setPosition(sf::Vector2f(WINDOW_CENTER.x, WINDOW_CENTER.y));
 	catcher.setPointCount(res * 2 + 2); //needs to be even because there are two circular edges
 	//catcher.setFillColor(sf::Color::Cyan);
 	catcher.setFillColor(sf::Color::Transparent);

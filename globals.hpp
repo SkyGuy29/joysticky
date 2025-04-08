@@ -8,7 +8,10 @@
 static constexpr auto PI = 3.1415926535897932;
 static constexpr float WINDOW_SCALE = 0.8;
 static const sf::Vector2i WINDOW_SIZE(1920, 1080);
+static const sf::Vector2f WINDOW_CENTER(WINDOW_SIZE.x * WINDOW_SCALE / 2.f, WINDOW_SIZE.y * WINDOW_SCALE / 2.f);
 static constexpr int FPS = 60;
+static constexpr float SCROLL_SPEED = 100;
+static constexpr float BPM = 120;
 
 
 //returns the distance between two points.
@@ -16,6 +19,15 @@ static float distBetween(const sf::Vector2f point1, const sf::Vector2f point2)
 {
     const sf::Vector2f d = point1 - point2;
     return hypotf(d.x, d.y);
+}
+
+
+//returns a point based on an ease in ease out movement setup, as long as t increases at a constant rate
+//t MUST be between 0 and 1 for proper easing
+static sf::Vector2f lerp(const sf::Vector2f point1, const sf::Vector2f point2, const float t)
+{
+    const sf::Vector2f d = point2 - point1;
+    return {point1.x + d.x * t, point1.y + d.y * t};
 }
 
 
@@ -30,7 +42,6 @@ static float lawOfCos(const sf::Vector2f p1, const sf::Vector2f p2, const sf::Ve
     //the law in states that (the angle opposite of c) = acos((a*a + b*b - c*c) / (2ab))
     return acos((a * a + c * c - b * b) / (2 * a * c));
 }
-//aaaaand we didnt even use it LOL
 
 
 //returns the position of the mouse relative to the window,

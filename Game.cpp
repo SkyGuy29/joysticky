@@ -6,7 +6,6 @@ Game::Game()
 	//Create the window
 	window.create(sf::VideoMode(WINDOW_SIZE.x * WINDOW_SCALE, WINDOW_SIZE.y * WINDOW_SCALE), "JOYSTICKY");
 	window.setFramerateLimit(FPS);
-	window.setVerticalSyncEnabled(true);
 
 	//Load the level
 	level.load();
