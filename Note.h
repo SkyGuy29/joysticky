@@ -6,7 +6,7 @@ class Note
 {
 public:
 	Note();
-	Note(float, float, float, float, bool);
+	Note(float startPos, float setAngle, float setDuration, float setRotSpeed, bool setDeadzone);
 	~Note() = default;
 	void setNote(float, float, float, float, bool);
 

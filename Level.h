@@ -13,6 +13,6 @@ public:
 private:
 	Catcher catcher;
 	bool paused = false; //pausing invalidates the run
-	Note note;
+	std::vector<Note> notes;
 };
 
