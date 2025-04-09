@@ -5,7 +5,7 @@ Level::Level()
 {
 	for (int i = 0; i < 5; i++)
 	{
-		notes.emplace_back(4 + i, i * PI / 4, 4, 0, false);
+		notes.emplace_back(4, i * PI / 4, 1, 0, false);
 	}
 }
 

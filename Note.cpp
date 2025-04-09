@@ -29,16 +29,29 @@ void Note::setNote(float startPos, float setAngle, float setDuration, float setR
 }
 
 
-static constexpr float fix = 50;
+static constexpr float fix = 500;
 
 void Note::update()
 {
-	pos -= fix * SCROLL_SPEED / FPS / BPM;
+	pos -= 1 / 60 / BPM / FPS;
 }
 
 
 void Note::drawTo(sf::RenderWindow& window)
 {
+	constexpr float res = 100;
+
+	sf::Vector2f catcherEdge(WINDOW_CENTER.x + CATCHER_RAD * cos(angle),
+		WINDOW_CENTER.y + CATCHER_RAD + sin(angle));
+
+	for (int i = 0; i < res; i++)
+	{
+		//move and draw along the note line
+		circ.setPosition(lerp(sf::Vector2f(catcherEdge.x + fix * pos / BPM, catcherEdge.y),
+			sf::Vector2f(catcherEdge.x + fix * (pos + duration) / BPM, catcherEdge.y), i / res));
+		window.draw(circ);
+	}
+	/*
 	constexpr float res = 100;
 
 	//theoretical "1" spot in terms of beats, the scale used by internal positioning
@@ -52,4 +65,5 @@ void Note::drawTo(sf::RenderWindow& window)
 		circ.setPosition(lerp(WINDOW_CENTER + one * pos, WINDOW_CENTER + one * (pos + duration), i / res));
 		window.draw(circ);
 	}
+	*/
 }

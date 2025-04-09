@@ -12,6 +12,7 @@ static const sf::Vector2f WINDOW_CENTER(WINDOW_SIZE.x * WINDOW_SCALE / 2.f, WIND
 static constexpr int FPS = 60;
 static constexpr float SCROLL_SPEED = 100;
 static constexpr float BPM = 60;
+static constexpr float CATCHER_RAD = 240 * WINDOW_SCALE;
 
 
 //returns the distance between two points.
