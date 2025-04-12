@@ -11,7 +11,7 @@ Note::Note()
 
 Note::Note(float startPos, float setAngle, float setDuration, float setRotSpeed, bool setDeadzone)
 {
-	circ.setRadius(10 * WINDOW_SCALE);
+	circ.setRadius(25 * WINDOW_SCALE);
 	circ.setFillColor(sf::Color::Green);
 	circ.setOrigin(circ.getRadius(), circ.getRadius());
 
@@ -29,11 +29,10 @@ void Note::setNote(float startPos, float setAngle, float setDuration, float setR
 }
 
 
-static constexpr float fix = 500;
 
 void Note::update()
 {
-	pos -= 1 / 60 / BPM / FPS;
+	pos -= BPM / FPS / 60.f;
 }
 
 
@@ -42,28 +41,18 @@ void Note::drawTo(sf::RenderWindow& window)
 	constexpr float res = 100;
 
 	sf::Vector2f catcherEdge(WINDOW_CENTER.x + CATCHER_RAD * cos(angle),
-		WINDOW_CENTER.y + CATCHER_RAD + sin(angle));
+		WINDOW_CENTER.y + CATCHER_RAD * sin(angle));
+
+	const float one = SCROLL_SPEED * 60 / BPM;
 
 	for (int i = 0; i < res; i++)
 	{
 		//move and draw along the note line
-		circ.setPosition(lerp(sf::Vector2f(catcherEdge.x + fix * pos / BPM, catcherEdge.y),
-			sf::Vector2f(catcherEdge.x + fix * (pos + duration) / BPM, catcherEdge.y), i / res));
+		circ.setPosition(lerp(sf::Vector2f(catcherEdge.x + pos * one * cos(angle), catcherEdge.y + pos * one * sin(angle)),
+			sf::Vector2f(catcherEdge.x + (pos + duration) * one * cos(angle), catcherEdge.y + (pos + duration) * one * sin(angle)),
+			i / res));
 		window.draw(circ);
 	}
-	/*
-	constexpr float res = 100;
 
-	//theoretical "1" spot in terms of beats, the scale used by internal positioning
-	//multiplied by a position value to find the physical spot of the position
-	sf::Vector2f one(fix * SCROLL_SPEED * WINDOW_SCALE * cos(angle) / BPM,
-		fix * SCROLL_SPEED * WINDOW_SCALE * sin(angle) / BPM);
-
-	for (int i = 0; i < res; i++)
-	{
-		//move and draw along the note line
-		circ.setPosition(lerp(WINDOW_CENTER + one * pos, WINDOW_CENTER + one * (pos + duration), i / res));
-		window.draw(circ);
-	}
-	*/
+	//THIS TOOK ACTUAL DAYS TO MAKE
 }

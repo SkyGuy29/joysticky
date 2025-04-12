@@ -11,7 +11,7 @@ static const sf::Vector2i WINDOW_SIZE(1920, 1080);
 static const sf::Vector2f WINDOW_CENTER(WINDOW_SIZE.x * WINDOW_SCALE / 2.f, WINDOW_SIZE.y * WINDOW_SCALE / 2.f);
 static constexpr int FPS = 60;
 static constexpr float SCROLL_SPEED = 100;
-static constexpr float BPM = 60;
+static constexpr float BPM = 120;
 static constexpr float CATCHER_RAD = 240 * WINDOW_SCALE;
 
 
