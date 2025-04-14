@@ -9,6 +9,7 @@ public:
 	~Level() = default;
 	void load();
 	void update(sf::RenderWindow&);
+	bool catchCheck();
 	void drawTo(sf::RenderWindow&);
 private:
 	Catcher catcher;

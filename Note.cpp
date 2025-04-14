@@ -22,14 +22,14 @@ Note::Note(float startPos, float setAngle, float setDuration, float setRotSpeed,
 void Note::setNote(float startPos, float setAngle, float setDuration, float setRotSpeed, bool setDeadzone)
 {
 	pos = startPos;
-	angle = setAngle;
+	angle = rad(setAngle);
 	duration = setDuration;
 	rotationSpeed = setRotSpeed;
-	deadzone = setDeadzone;
+	deadzone = rad(setDeadzone);
 }
 
 
-
+//THESE TWO FUNCTIONS TOOK ACTUAL DAYS TO MAKE
 void Note::update()
 {
 	pos -= BPM / FPS / 60.f;
@@ -39,20 +39,20 @@ void Note::update()
 void Note::drawTo(sf::RenderWindow& window)
 {
 	constexpr float res = 100;
-
-	sf::Vector2f catcherEdge(WINDOW_CENTER.x + CATCHER_RAD * cos(angle),
+	constexpr float beatLength = SCROLL_SPEED * 60.f / BPM;
+	const sf::Vector2f catcherEdge(WINDOW_CENTER.x + CATCHER_RAD * cos(angle),
 		WINDOW_CENTER.y + CATCHER_RAD * sin(angle));
-
-	const float one = SCROLL_SPEED * 60 / BPM;
 
 	for (int i = 0; i < res; i++)
 	{
-		//move and draw along the note line
-		circ.setPosition(lerp(sf::Vector2f(catcherEdge.x + pos * one * cos(angle), catcherEdge.y + pos * one * sin(angle)),
-			sf::Vector2f(catcherEdge.x + (pos + duration) * one * cos(angle), catcherEdge.y + (pos + duration) * one * sin(angle)),
-			i / res));
-		window.draw(circ);
+		if (pos + duration * i / res > 0)
+		{
+			//move and draw along the note line
+			circ.setPosition(lerp(sf::Vector2f(catcherEdge.x + pos * beatLength * cos(angle),
+				catcherEdge.y + pos * beatLength * sin(angle)),
+				sf::Vector2f(catcherEdge.x + (pos + duration) * beatLength * cos(angle),
+					catcherEdge.y + (pos + duration) * beatLength * sin(angle)), i / res));
+			window.draw(circ);
+		}
 	}
-
-	//THIS TOOK ACTUAL DAYS TO MAKE
 }

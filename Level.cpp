@@ -5,8 +5,9 @@ Level::Level()
 {
 	for (int i = 0; i < 5; i++)
 	{
-		notes.emplace_back(4 + i, i * PI / 4, 1, 0, false);
+		notes.emplace_back(4 + i, i * 45, 1, 0, false);
 	}
+	notes.emplace_back(10, 0, 2, 45 / 2.f, false);
 }
 
 
@@ -24,9 +25,15 @@ void Level::update(sf::RenderWindow& window)
 }
 
 
+bool Level::catchCheck()
+{
+	//return abs(note.getRotation() - catcher.getRotation()) <= catcher.getWidth())
+}
+
+
 void Level::drawTo(sf::RenderWindow& window)
 {
-	catcher.drawTo(window);
 	for(auto& note : notes)
 		note.drawTo(window);
+	catcher.drawTo(window);
 }

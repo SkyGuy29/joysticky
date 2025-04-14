@@ -15,6 +15,14 @@ static constexpr float BPM = 120;
 static constexpr float CATCHER_RAD = 240 * WINDOW_SCALE;
 
 
+//converts a radian value to degrees
+static float deg(const float rad) { return rad * 180.f / PI; }
+
+
+//converts a degree value to radians
+static float rad(const float deg) { return deg * PI / 180.f; }
+
+
 //returns the distance between two points.
 static float distBetween(const sf::Vector2f point1, const sf::Vector2f point2)
 {
